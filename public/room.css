@@ -1,0 +1,14 @@
+#video-grid {
+    display: flex;
+    justify-content: center;
+}
+video {
+    transform: rotateY(180deg);
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
+#Minh {
+    color: red;
+}
