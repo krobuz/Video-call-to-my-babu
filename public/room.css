@@ -1,10 +1,78 @@
+:root {
+    --primary-color: #6528F7;
+    --secondary-color: #A076F9;
+    --secondary-brighter-color: #c5aaff;
+    --neutral-color: #D7BBF5;
+    --background-color: #EDE4FF;
+    --thin-line: rgba(0, 0, 0, 0.3 );
+  }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    background-color: var(--primary-color);
+}
+
+.main_left {
+    flex: 0.75;
+    /* border-color: var(--thin-line);
+    border-width: 0px 1px 0px 0px;
+    border-style: solid; */
+}
+
+.main_right {
+    flex: 0.25;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+}
+
+.main_right div, .main_left {
+    margin: 5px;
+    border-radius: 16px;
+    background-color: var(--background-color);
+    box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2) inset;
+    -webkit-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2) inset;
+    -moz-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2) inset;
+    box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2);
+}
+
+.chat-box {
+    background-color: var(--background-color);
+    flex: auto;
+}
+
+.text-box {
+    height: 70px;
+    background-color: var(--background-color);
+}
+
 #video-grid {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 video {
     transform: rotateY(180deg);
     width: 400px;
-    height: 300px;
+    height: 250px;
     object-fit: cover;
+    margin: 16px 0px 0px 16px;
+    border-radius: 30px;
+    /* border-color: var(--secondary-color);
+    border-style: solid;
+    border-width: 7px;
+    box-shadow: 0px 0px 7px 6px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 0px 7px 6px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 0px 7px 6px rgba(0, 0, 0, 0.2); */
 }

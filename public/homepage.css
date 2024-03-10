@@ -1,4 +1,96 @@
-h1 {
-    font-size: 100px;
-    color: red;
+:root {
+    --primary-color: #6528F7;
+    --primary-brighter-color: #976bff;
+    --secondary-color: #A076F9;
+    --secondary-brighter-color: #c5aaff;
+    --neutral-color: #D7BBF5;
+    --background-color: #EDE4FF;
+    --thin-line: rgba(0, 0, 0, 0.3 );
+    
+  }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--background-color);
+}
+
+.main_top {
+    flex: 0.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#title {
+    user-select: none;
+    text-align: center;
+    /* line-height: 300px; */
+    font-size: 90px;
+    margin: 0;
+    font-family: "Pacifico";
+    font-weight: normal;
+    color: var(--primary-color);
+}
+
+.main_bottom {
+    display: flex;
+    flex: 0.6;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#createRoomBtn, #joinRoomBtn {
+    margin-bottom: 16px;
+    font-size: 16px;
+    border: none;
+    padding: 16px 22px;
+    border-radius: 25px;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+
+    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.15);
+}
+
+#createRoomBtn:hover, #joinRoomBtn:hover {
+    background-color: var(--primary-brighter-color);
+    cursor: pointer;
+}
+
+.roomIdInput {
+    height: 40px;
+    border-radius: 20px;
+    border-color: var(--thin-line);
+    border-style: solid;
+    border-width: 1px;
+    margin-bottom: 16px;
+}
+
+#userInput {
+    height: 40px;
+    border-radius: 20px;
+    background: none;
+    border: none;
+}
+#userInput::placeholder {
+    color: val(--thin-line);
+}
+#userInput:focus {
+    outline: none; 
+    border-color: transparent;
 }
