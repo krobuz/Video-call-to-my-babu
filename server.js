@@ -10,7 +10,6 @@ const peerServer = ExpressPeerServer(server, {
 });
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
-//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/peerjs', peerServer);
 
@@ -23,6 +22,8 @@ app.post('/createRoom', (req, res) => {
     res.json({ roomId });
 });
 
+
+
 app.get('/room/:room', (req, res) => {
     res.render('room', { roomId: req.params.room })
 })
@@ -32,15 +33,14 @@ io.on('connection', socket => {
         console.log('Room ID: ' + roomId , '\n' + 'User ID: ' + userId)
         socket.join(roomId)
         socket.broadcast.to(roomId).emit('user-connected', userId)
-        
-        //socket.to(roomId).emit('user-connected', userId)
-        //socket.to(roomId).broadcast.emit('user-connected', userId)
-        //socket.broadcast.emit('user-connected', userId)
 
-        // socket.on('disconnect', () => {
-        //     socket.to(roomId).broadcast.emit('user-disconnected', userId)
-        //     //socket.broadcast.emit('user-disconnected', userId)
-        //})
+        socket.on('message', message => {
+            io.to(roomId).emit('createMessage', message)
+        })
+
+        socket.on('disconnect', () => {
+            socket.broadcast.to(roomId).emit('user-disconnected', userId)
+        })
     })
 })
 

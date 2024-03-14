@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Room</title>
+    <title>"aloemyeu!"</title>
+    <link rel="icon" href="/img/icon.png" type="image/png">
     <link rel="stylesheet" href="homepage.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,11 +18,12 @@
         </div>
         <div class="main_bottom">
             <div class="control-section">
-                <button id="createRoomBtn">Create Room</button>
-                <div class="roomIdInput">
-                    <input type="text" id="userInput" placeholder="Room Id:">
+                <input type="text" id="userName" class="textBox" placeholder="Your name:" maxlength="30">
+                <input type="text" id="userInput" class="textBox" placeholder="Enter Room Id:">
+                <div class="buttons">
+                    <button id="createRoomBtn">Create Room</button>
+                    <button id="joinRoomBtn">Join Room</button>
                 </div>
-                <button id="joinRoomBtn">Join Room</button>
             </div>
         </div>
     </div>
@@ -45,6 +47,7 @@
                     console.error('Error:', error);
                 });
         });
+
     </script>
 </body>
 </html>

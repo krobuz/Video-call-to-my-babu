@@ -31,7 +31,6 @@ body {
 #title {
     user-select: none;
     text-align: center;
-    /* line-height: 300px; */
     font-size: 90px;
     margin: 0;
     font-family: "Pacifico";
@@ -42,7 +41,7 @@ body {
 .main_bottom {
     display: flex;
     flex: 0.6;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
@@ -52,45 +51,39 @@ body {
     flex-direction: column;
 }
 
-#createRoomBtn, #joinRoomBtn {
-    margin-bottom: 16px;
+
+ .textBox {
     font-size: 16px;
+    padding: 14px 24px;
+    margin-bottom: 10px;
     border: none;
-    padding: 16px 22px;
-    border-radius: 25px;
-    background-color: var(--primary-color);
-    color: white;
+    border-radius: 4px;
+ }
+ .textBox:focus{
+    outline: none;
+ }
+
+ .buttons {
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .buttons button {
+    padding: 10px 36px;
+    font-size: 15px;
     font-weight: 600;
-
-    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.15);
-    -webkit-box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.15);
-}
-
-#createRoomBtn:hover, #joinRoomBtn:hover {
-    background-color: var(--primary-brighter-color);
-    cursor: pointer;
-}
-
-.roomIdInput {
-    height: 40px;
-    border-radius: 20px;
-    border-color: var(--thin-line);
-    border-style: solid;
-    border-width: 1px;
-    margin-bottom: 16px;
-}
-
-#userInput {
-    height: 40px;
-    border-radius: 20px;
-    background: none;
+    color: white;
     border: none;
-}
-#userInput::placeholder {
-    color: val(--thin-line);
-}
-#userInput:focus {
-    outline: none; 
-    border-color: transparent;
-}
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+ }
+
+ .buttons button:hover{
+    background-color: var(--primary-brighter-color);
+ }
+
+ #createRoomBtn {
+    margin-right: 10px;
+ }
+

@@ -1,7 +1,11 @@
+
 const socket = io('/')
 const config = { audio: true, video: true}
 //const userInfo = document.getElementById('userId')
 const videoGrid = document.getElementById('video-grid')
+const chatBox = document.getElementById('chat-box')
+
+
 
 const myVideo = document.createElement('video')
 myVideo.muted = true
@@ -11,10 +15,6 @@ var peer = new Peer({
     host: '/',
     port: '3000'
 })
-// var getUserMedia = 
-// navigator.getUserMedia || 
-// navigator.webkitGetUserMedia || 
-// navigator.mozGetUserMedia;
 
 const peers = {}
 
@@ -30,20 +30,39 @@ navigator.mediaDevices.getUserMedia(config)
         call.on('stream', userVideoStream => {
           addVideoStream(video, userVideoStream)
         })
+        peers[call.peer] = call;
+        call.on('close', () => {
+            video.remove()
+        });
     })
 
-        //when an user join
     socket.on('user-connected', userId => {
-        //joining
         setTimeout(() => {
-            //joined
             connectToNewUser(userId, stream)
-        }, 1000)
+        }, 250)
       })
+
+    socket.on('user-disconnected', userId => {
+        if (peers[userId]) peers[userId].close()
+    })
+    
+    socket.on('createMessage', message => {
+        const chatMessages = document.getElementById('chatMessages')
+        const li = document.createElement('li');
+        li.className = "message";
+        li.textContent = message;
+        chatMessages.appendChild(li);
+    })
 })
+
 
 peer.on('open', id => {
     socket.emit('join-room', ROOM_ID, id)
+    console.log(ROOM_ID)
+    console.log(id)
+    const roomId = document.getElementById('copyRoomId')
+    roomId.textContent = ROOM_ID
+
 })
 
 function connectToNewUser(userId, stream) {
@@ -52,18 +71,36 @@ function connectToNewUser(userId, stream) {
     call.on('stream', userVideoStream => {
         addVideoStream(video, userVideoStream)
     })
-    // call.on('close', () => {
-    //     video.remove()
-    // })
-
-    //peers[userId] = call 
+    peers[userId] = call 
+    call.on('close', () => {
+        video.remove()
+    })
 }
 
 function addVideoStream(video, stream){
     video.srcObject = stream
+    video.setAttribute('data-peer', peer.id)
     video.addEventListener('loadedmetadata', () => {
         video.play()
     })
     videoGrid.append(video)
 }  
 
+function sendMessage(text) {
+    if(text.length !== 0){
+        socket.emit('message', text)
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+        let text = document.getElementById('inputText').value;
+        sendMessage(text);
+    }
+}
+
+// function setDefaultName(input) {
+//     if (input.value === '') {
+//         input.value = 'Anonymous';
+//     }
+// }
