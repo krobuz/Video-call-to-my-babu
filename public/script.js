@@ -39,7 +39,7 @@ navigator.mediaDevices.getUserMedia(config)
     socket.on('user-connected', userId => {
         setTimeout(() => {
             connectToNewUser(userId, stream)
-        }, 250)
+        }, 1000)
       })
 
     socket.on('user-disconnected', userId => {
@@ -104,3 +104,15 @@ function handleKeyPress(event) {
 //         input.value = 'Anonymous';
 //     }
 // }
+
+function copyId() {
+    var idToCopy = document.getElementById('copyRoomId').innerText;
+    var tempText = document.createElement('textarea');
+    tempText.value = idToCopy;
+
+    document.body.appendChild(tempText);
+    tempText.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempText);
+    
+}
