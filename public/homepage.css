@@ -51,6 +51,10 @@ body {
     flex-direction: column;
 }
 
+.input-section {
+    display: flex;
+    flex-direction: column;
+}
 
  .textBox {
     font-size: 16px;

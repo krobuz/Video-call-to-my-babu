@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 //const path = require('path')
 const app = express()
 const server = require('http').Server(app)
@@ -8,6 +9,9 @@ const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server, {
   debug: true
 });
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
@@ -22,7 +26,15 @@ app.post('/createRoom', (req, res) => {
     res.json({ roomId });
 });
 
-
+app.post('/submit', (req, res) => {
+    console.log('Request body:', req.body);
+    const username = req.body.username;
+    if (username) {
+        console.log('User name submitted:', username);
+    } else {
+        res.status(400).send('Error: Username is missing.');
+    }
+})
 
 app.get('/room/:room', (req, res) => {
     res.render('room', { roomId: req.params.room })

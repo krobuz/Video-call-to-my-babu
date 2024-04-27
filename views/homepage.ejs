@@ -18,9 +18,11 @@
         </div>
         <div class="main_bottom">
             <div class="control-section">
-                <input type="text" id="userName" class="textBox" placeholder="Your name:" maxlength="30">
-                <input type="text" id="userInput" class="textBox" placeholder="Enter Room Id:">
-                <div class="buttons">
+                <form id="inputForm" class="input-section">
+                    <input type="text" id="userNameInput" class="textBox" placeholder="Your name:" maxlength="30" autocomplete="off"> 
+                    <input type="text" id="roomIdInput" class="textBox" placeholder="Enter Room Id:" autocomplete="off">
+                </form>
+               <div class="buttons">
                     <button id="createRoomBtn">Create Room</button>
                     <button id="joinRoomBtn">Join Room</button>
                 </div>
@@ -48,6 +50,28 @@
                 });
         });
 
+        document.getElementById("userNameInput").addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) { // 13 is the Enter key code
+                event.preventDefault(); // Prevent default form submission
+
+                // Get the username value
+                var username = document.getElementById("userNameInput").value;
+                
+
+                // Send data to the server using AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/submit", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Server response:", xhr.responseText);
+                    // Optionally, you can handle the response here
+                }
+                };
+                xhr.send("username=" + encodeURIComponent(username));
+                document.getElementById("roomIdInput").focus();
+            }
+        })
     </script>
 </body>
 </html>

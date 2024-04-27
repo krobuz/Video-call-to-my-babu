@@ -27,9 +27,20 @@
                 <div class="media-control-button">
                     <i class="fa-solid fa-microphone-slash"></i><br>
 
-                    <i class="fa-solid fa-video"></i><br>
+                    <i class="fa-solid fa-video" onclick="offCam()"></i><br>
 
-                    <i class="fa-solid fa-phone-slash"></i><br>
+                    <i class="fa-solid fa-phone-slash" id = "quitBtn"></i><br>
+
+                    <!-- Add this HTML for the modal dialog -->
+                    <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p>Are you sure you want to quit?</p>
+                        <button id="cancelBtn">Cancel</button>
+                        <button id="confirmQuitBtn">Quit</button>
+                    </div>
+                    </div>
+
 
                 </div>
                 <div class="media-roomId">
@@ -48,7 +59,7 @@
                 </ul>
             </div>
             <div class="text-box">
-                <input type="text" id="inputText" placeholder="Aa" onkeydown="handleKeyPress(event)">
+                <input type="text" id="inputText" placeholder="Aa" onkeydown="handleKeyPress(event)" autocomplete="off">
                 <i class="fa-solid fa-paper-plane"></i>
             </div>
         </div>
@@ -56,4 +67,26 @@
     </div>
       
 </body>
+    <script>
+        // Add this JavaScript to handle the modal dialog
+        document.getElementById("quitBtn").addEventListener('click', function() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            var cancelBtn = document.getElementById("cancelBtn");
+            cancelBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            var confirmQuitBtn = document.getElementById("confirmQuitBtn");
+            confirmQuitBtn.onclick = function() {
+                window.location.href = '/';
+            }
+        });
+    </script>
 </html>

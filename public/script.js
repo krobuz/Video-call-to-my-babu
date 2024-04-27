@@ -116,3 +116,8 @@ function copyId() {
     document.body.removeChild(tempText);
     
 }
+
+
+function quitCall() {
+    
+}
