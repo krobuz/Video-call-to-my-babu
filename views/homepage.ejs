@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>"aloemyeu!"</title>
     <link rel="icon" href="/img/icon.png" type="image/png">
-    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <script src="/script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -53,25 +54,25 @@
         document.getElementById("userNameInput").addEventListener("keyup", function(event) {
             if (event.keyCode === 13) { // 13 is the Enter key code
                 event.preventDefault(); // Prevent default form submission
-
-                // Get the username value
-                var username = document.getElementById("userNameInput").value;
                 
+                var username = document.getElementById("userNameInput").value;
 
-                // Send data to the server using AJAX
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/submit", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    console.log("Server response:", xhr.responseText);
-                    // Optionally, you can handle the response here
-                }
-                };
-                xhr.send("username=" + encodeURIComponent(username));
+                // Send username to the server
+                fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username: username })
+                }).then(response => {
+                    // Handle response if needed
+                    console.log('Username submitted:', username);
+                }).catch(error => {
+                    console.error('Error submitting username:', error);
+                });
                 document.getElementById("roomIdInput").focus();
             }
-        })
+        });
     </script>
 </body>
 </html>

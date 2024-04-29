@@ -10,7 +10,7 @@
     </script>
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js" defer></script>
     <script src="/socket.io/socket.io.js" defer></script>
-    <link rel="stylesheet" href="/room.css">
+    <link rel="stylesheet" href="/css/room.css">
     <script src="/script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,10 +58,10 @@
 
                 </ul>
             </div>
-            <div class="text-box">
+            <form id="messageForm" class="text-box">
                 <input type="text" id="inputText" placeholder="Aa" onkeydown="handleKeyPress(event)" autocomplete="off">
                 <i class="fa-solid fa-paper-plane"></i>
-            </div>
+            </form>
         </div>
         
     </div>
@@ -87,6 +87,17 @@
             confirmQuitBtn.onclick = function() {
                 window.location.href = '/';
             }
+        });
+
+        document.getElementById("messageForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            //var message = document.getElementById("messageInput").value;
+
+            // Process the message (send to server, etc.)
+
+            // Clear the input field after submitting
+            event.target.reset();
         });
     </script>
 </html>

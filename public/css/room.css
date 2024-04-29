@@ -76,6 +76,25 @@ video {
     box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.2);
 }
 
+#userNameVideo {
+    position: absolute;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.5); 
+    padding: 6px 16px;
+    margin-top: 150px;
+    border-radius: 4px;
+    font-size: 20px
+}
+
+#video-grid:hover #userNameVideo {
+    display: block
+}
+
+.userName{
+    font-weight: bold;
+    font-size: 14px;
+}
+
 .media-roomId {
     display: flex;
     align-items: center;
@@ -172,6 +191,7 @@ video {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 2px;
 }
 
 #inputText {
@@ -202,6 +222,15 @@ video {
     background-color: #dac8ff;
 }
 
+#chatMessages {
+    padding: 25px;
+}
+
 #chatMessages li {
     list-style: none;
+}
+
+#chatMessages li.message {
+    margin-bottom: 8px;
+    font-size: 16px;
 }
