@@ -49,8 +49,7 @@ app.get('/room/:room', (req, res) => {
 const users = {}
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId) => {
-        console.log('Room ID: ' + roomId)
-        console.log('User ID: ' + userId)
+
         //console.log('User Name: ' + globalUserName)
         const username = global.username
         console.log('User connected:', username);
