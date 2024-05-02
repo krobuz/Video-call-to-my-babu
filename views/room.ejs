@@ -26,11 +26,8 @@
             <div class="media-control">
                 <div class="media-control-button">
                     <i class="fa-solid fa-microphone-slash"></i><br>
-
                     <i class="fa-solid fa-video" onclick="offCam()"></i><br>
-
                     <i class="fa-solid fa-phone-slash" id = "quitBtn"></i><br>
-
                     <!-- Add this HTML for the modal dialog -->
                     <div id="myModal" class="modal">
                     <div class="modal-content">
@@ -40,26 +37,18 @@
                         <button id="confirmQuitBtn">Quit</button>
                     </div>
                     </div>
-
-
                 </div>
                 <div class="media-roomId">
-                    <div id="copyRoomId">
-                    
-                    </div>
+                    <div id="copyRoomId"></div>
                     <i class="fa-solid fa-copy" onclick="copyId()"></i>
-                </div>
-                
+                </div>       
             </div>
         </div>
         <div class="main_right">
             <div class="chat-box">
-                <ul id="chatMessages">
-
-                </ul>
             </div>
-            <form id="messageForm" class="text-box">
-                <input type="text" id="inputText" placeholder="Aa" onkeydown="handleKeyPress(event)" autocomplete="off">
+            <form id="messageInputForm" class="text-box">
+                <input type="text" id="inputBox" placeholder="Aa" autocomplete="off">
                 <i class="fa-solid fa-paper-plane"></i>
             </form>
         </div>

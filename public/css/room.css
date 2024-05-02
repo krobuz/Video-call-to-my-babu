@@ -183,6 +183,8 @@ video {
 .chat-box {
     background-color: var(--background-color);
     flex: auto;
+    max-height: 510px;
+    overflow-y: auto;
 }
 
 .text-box {
@@ -194,7 +196,7 @@ video {
     margin: 2px;
 }
 
-#inputText {
+#inputBox {
     width: 100%;
     height: 60%;
     margin-left: 10px;
@@ -207,7 +209,7 @@ video {
     background-color: #dac8ff;
 }
 
-#inputText:focus {
+#inputBox:focus {
     border: transparent;
     outline: none;
 }
@@ -222,15 +224,15 @@ video {
     background-color: #dac8ff;
 }
 
-#chatMessages {
+#chatMessagesList {
     padding: 25px;
 }
 
-#chatMessages li {
+#chatMessagesList li {
     list-style: none;
 }
 
-#chatMessages li.message {
+#chatMessagesList li.message {
     margin-bottom: 8px;
     font-size: 16px;
 }
