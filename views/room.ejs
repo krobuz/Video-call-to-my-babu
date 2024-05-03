@@ -79,13 +79,7 @@
         });
 
         document.getElementById("messageForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-            
-            //var message = document.getElementById("messageInput").value;
-
-            // Process the message (send to server, etc.)
-
-            // Clear the input field after submitting
+            event.preventDefault(); 
             event.target.reset();
         });
     </script>

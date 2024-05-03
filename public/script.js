@@ -1,4 +1,4 @@
-const socket = io()
+const socket = io('/')
 const config = { audio: true, video: true}
 const chatBox = document.querySelector('.chat-box')
 const messageForm = document.getElementById('messageInputForm')
@@ -6,31 +6,97 @@ const videoGrid = document.getElementById('video-grid')
 
 const myVideo = document.createElement('video')
 myVideo.muted = true
-const myUserName = document.createElement('span')
 
-
-
-var peer = new Peer({
+var peer = new Peer(undefined, {
     path: '/peerjs',
     host: '/',
     port: '3000'
 })
 
 const peers = {}
+
+
+let myName = 'Anonymous';
+peer.on('open', id => {
+    socket.emit('joinRoom', { id, myName, ROOM_ID });
+
+    const roomId = document.getElementById('copyRoomId')
+    roomId.textContent = ROOM_ID
+});
+
 socket.on('username', username => {
-    const userName = username
-    socket.emit('joinRoom', {userName, ROOM_ID})
-    console.log(userName, ROOM_ID)
-})
+    if (username !== '' && username !== null) {
+        myName = username;
+    }
+});
+
 
 
 socket.on('message', message => {
-    console.log(message)
+    //console.log(message)
     outputMessage(message)
 
     //scroll down the chat
     chatBox.scrollTop = chatBox.scrollHeight
 })
+
+
+let myVideoStream
+navigator.mediaDevices.getUserMedia(config)
+.then(stream => {
+    myVideoStream = stream
+    addVideoStream(myVideo, myVideoStream)
+
+    peer.on('call', call => {
+        call.answer(stream)
+        const video = document.createElement('video')
+        call.on('stream', userVideoStream => {
+            addVideoStream(video, userVideoStream)
+        })
+        peers[call.peer] = call
+        call.on('close', () => {
+            video.remove()
+        })
+    })
+
+    socket.on('user-connected', userId => {
+        setTimeout(() => {
+            connectToNewUser(userId, stream)
+            console.log('new user connected, id : ' + userId)
+        }, 1000)
+    })
+
+    socket.on('user-disconnected', userId => {
+        if (peers[userId]) {
+            peers[userId].close()
+            console.log('an user disconnected, id : ' + userId)
+        }
+    })
+})
+
+function connectToNewUser(userId, stream) {
+    const call = peer.call(userId, stream)
+    console.log('Received stream from user:', call, stream);
+    const video = document.createElement('video')
+    call.on('stream', userVideoStream => {
+        addVideoStream(video, userVideoStream)
+        console.log('Received stream from user:', call, stream);
+    })
+    peers[userId] = call
+    call.on('close', () => {
+        video.remove()
+    })
+}
+
+function addVideoStream(video, stream){
+    console.log('Adding video stream to DOM');
+    video.srcObject = stream
+    video.setAttribute('data-peer', peer.id)
+    video.addEventListener('loadedmetadata', () => {
+        video.play()
+    })
+    videoGrid.append(video)
+}  
 
 
 messageForm.addEventListener('submit',(e) => {
@@ -51,12 +117,6 @@ messageForm.addEventListener('submit',(e) => {
 
 })
 
-
-
-
-
-
-
 //output message to DOM 
 function outputMessage(message) {
     const div = document.createElement('div')
@@ -66,27 +126,6 @@ function outputMessage(message) {
     document.querySelector('.chat-box').appendChild(div)
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -28,8 +28,6 @@ app.post('/submit', (req, res) => {
     const username = req.body.username;
     console.log(req.body)
     if (username) {
-        // Store the username in a session or global variable
-        // For simplicity, I'll use a global variable here
         global.username = username;
         res.status(200).send('Username submitted successfully');
     } else {
@@ -48,60 +46,41 @@ app.get('/room/:room', (req, res) => {
     //console.log(req.params)
 })
 
+const botName = "Bot"
 
 io.on('connection', socket => {
     //console.log(`new connection`)
     const username = global.username
-    console.log(username + ` line 55`)
+    //console.log(username + ` line 55`)
     socket.emit('username', username)
 
+    socket.on('joinRoom', ({id, myName, ROOM_ID }) => {
+        console.log(ROOM_ID, id, myName + ` line 60`)
+        const user = userJoin(id, myName, ROOM_ID)
 
-    socket.on('joinRoom', ({ userName, ROOM_ID }) => {
-        console.log(userName, ROOM_ID + ` line 60`)
-        const user = userJoin(socket.id, userName, ROOM_ID)
-        //console.log(socket.id)
         socket.join(ROOM_ID)
 
-        socket.emit('message', formatMessage('Bot', 'Welcome'))
+        //Welcome a new user
+        socket.emit('message', formatMessage(`${botName}`, `Welcome ${user.username}`))
 
-        //Broadcast when an user connect
-        socket.broadcast.to(ROOM_ID).emit('message', formatMessage(`${user.username}`, `${user.username} has joined`))
-       
+        //Broadcast when a user connect
+        socket.broadcast.to(ROOM_ID).emit('message', formatMessage(`${botName}`, `${user.username} has joined`))
+        socket.broadcast.to(ROOM_ID).emit('user-connected', user.id)
 
         //Listen for chat message
         socket.on('chatMessage', (msg) => {
             //console.log(msg)
             io.to(ROOM_ID).emit('message', formatMessage(`${user.username}`, msg))
-            console.log(ROOM_ID + ` line 79`)
+            //console.log(ROOM_ID + ` line 79`)
         })  
 
-
-        //When an user disconnect
+        //When a user disconnect
         socket.on('disconnect', () => {
-            io.to(ROOM_ID).emit('message', formatMessage(`${user.username}`, `${user.username} has left`))
+            io.to(ROOM_ID).emit('message', formatMessage(`${botName}`, `${user.username} has left`))
+            socket.broadcast.to(ROOM_ID).emit('user-disconnected', user.id)
         })
     })
-
- 
-
-   
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -116,12 +95,17 @@ io.on('connection', socket => {
 
 // io.on('connection', socket => {
 //     socket.on('join-room', (roomId, userId) => {
+
+
+
 //         console.log('Room ID: ' + roomId)
 //         console.log('User ID: ' + userId)
 //         //console.log('User Name: ' + globalUserName)
 //         const username = global.username
 //         console.log('User connected:', username);
 //         socket.emit('username', username);
+
+
 
 //         socket.join(roomId)
 //         socket.broadcast.to(roomId).emit('user-connected', userId, username)

@@ -33,8 +33,24 @@
     
     
     <script>
-        // When the button is clicked, send a request to create a new room
+
         document.getElementById('createRoomBtn').addEventListener('click', function() {
+            createNewRoom()
+        })
+
+        document.getElementById("roomIdInput").addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault()
+                joinRoom()
+            }
+        })
+
+        document.getElementById("joinRoomBtn").addEventListener("click", function() {
+            joinRoom()
+        })        
+
+        //Send a request to create a new room        
+        function createNewRoom(){
             fetch('/createRoom', { method: 'POST' })
                 .then(response => {
                     if (response.ok) {
@@ -49,8 +65,9 @@
                 .catch(error => {
                     console.error('Error:', error);
                 });
-        });
-
+        }
+        
+        //Send a request to submit user name
         document.getElementById("userNameInput").addEventListener("keyup", function(event) {
             if (event.keyCode === 13) { // 13 is the Enter key code
                 event.preventDefault(); // Prevent default form submission
@@ -73,6 +90,27 @@
                 document.getElementById("roomIdInput").focus();
             }
         });
+
+
+        function joinRoom() {
+            var idToJoin = document.getElementById("roomIdInput").value;
+            
+            // Regular expression to match UUID v4
+            var uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+            
+            if (idToJoin.trim() === "") {
+                // Handle case where no room ID is entered (create new room logic)
+                createNewRoom();
+            } else if (uuidRegex.test(idToJoin)) {
+                // Redirect to room with the entered ID
+                window.location.href = '/room/' + idToJoin;
+            } else {
+                alert("Invalid room ID. Please enter a valid ID.");
+                // You can also add logic to clear the input field or focus on it again.
+            }
+        }
+        
+
     </script>
 </body>
 </html>

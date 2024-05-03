@@ -104,7 +104,7 @@ video {
 }
 
 #copyRoomId {
-    width: 200px; /* Adjust width as needed */
+    width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -124,39 +124,39 @@ video {
 
 
 
-/* Add this CSS for styling the modal dialog */
+
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%; /* Could be more or less, depending on screen size */
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%; /* Could be more or less, depending on screen size */
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 
@@ -170,21 +170,46 @@ video {
 
 .main_right div, .main_left {
     margin: 2px;
-    /* border-radius: 4px; */
     background-color: var(--background-color);
-    box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2) inset;
-    -webkit-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2) inset;
-    -moz-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2) inset;
-    box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2);
-    -webkit-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 0px 4px 3px rgba(0,0,0,0.2);
+
 }
 
 .chat-box {
     background-color: var(--background-color);
     flex: auto;
+    height: 510px;
+    width: 320px;
     max-height: 510px;
+    max-width: 320px;
     overflow-y: auto;
+}
+
+
+div.message {
+    border-style: solid;
+    border-color: #18122B;
+    border-width: 1px;
+    margin-bottom: 4px !important;  
+}
+
+.message .meta {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 8px 10px 4px 16px;
+    color: var(--secondary-brighter-color);
+}
+
+.message span {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.message .text {
+    margin: 0px 16px 12px;
+    font-size: 16px;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .text-box {
@@ -224,15 +249,3 @@ video {
     background-color: #dac8ff;
 }
 
-#chatMessagesList {
-    padding: 25px;
-}
-
-#chatMessagesList li {
-    list-style: none;
-}
-
-#chatMessagesList li.message {
-    margin-bottom: 8px;
-    font-size: 16px;
-}
