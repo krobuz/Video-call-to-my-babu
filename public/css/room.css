@@ -1,11 +1,13 @@
 :root {
-    --primary-color: #18122B;
-    --primary-brighter-color: #201a34;
-    --secondary-color: #393053;
-    --secondary-brighter-color: #494065;
-    --neutral-color: #443C68;
-    --background-color: #e4dcff;
+    --primary-color: #521657;
+    --primary-brighter-color: #341a34;
+    --secondary-color: #4d3053;
+    --secondary-brighter-color: #624065;
+    --neutral-color: #613c68;
+    --background-color: #f1daf2;
     --thin-line: rgba(0, 0, 0, 0.3 );
+    --red-hover: #e45555;
+    --background-secondary-color: #feccff;
   }
 
 body {
@@ -27,7 +29,6 @@ i {
 
 .main_left {
     flex: 0.75;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -49,14 +50,14 @@ i {
 }
 
 .media-control-button i {
-    padding: 16px;
-    margin-left: 10px;
-    background-color: #dac8ff;
-    border-radius: 50%;
+    padding: 16px 18px;
+    margin-left: 8px;
+    background-color: var(--background-secondary-color);
+    border-radius: 4px;
 }
 
 .media-control-button i:hover {
-    background-color: #ff2323;
+    background-color: var(--red-hover);
 }
 
 #video-grid {
@@ -98,13 +99,13 @@ video {
 .media-roomId {
     display: flex;
     align-items: center;
-    background-color: #dac8ff;
+    background-color: var(--background-secondary-color);
     padding: 2px;
     border-radius: 4px;
 }
 
 #copyRoomId {
-    width: 200px;
+    width: 80px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -119,10 +120,8 @@ video {
 }
 
 .media-roomId i:hover {
-    background-color: #e7dbff;
+    background-color: var(--background-color);
 }
-
-
 
 
 .modal {
@@ -138,11 +137,16 @@ video {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: var(--background-secondary-color);
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    border-radius: 4px;
+    padding: 16px;
     border: 1px solid #888;
-    width: 30%; /* Could be more or less, depending on screen size */
+    width: 25%; /* Could be more or less, depending on screen size */
+}
+.modal-Btn{
+    display: flex;
+    justify-content: space-between;
 }
 
 .close {
@@ -159,10 +163,24 @@ video {
     cursor: pointer;
 }
 
+.modal-content button {
+    font-size: 16px;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
 
+#cancelBtn {
+    background-color: var(--background-color);
+}
+#confirmQuitBtn {
+    background-color: var(--red-hover);
+}
 
 .main_right {
     flex: 0.25;
+    max-width: 25%;
     display: flex;
     flex-direction: column; 
     justify-content: space-between;
@@ -176,26 +194,23 @@ video {
 
 .chat-box {
     background-color: var(--background-color);
-    flex: auto;
-    height: 510px;
-    width: 320px;
-    max-height: 510px;
-    max-width: 320px;
+    flex: 100;
     overflow-y: auto;
 }
 
 
 div.message {
-    border-style: solid;
-    border-color: #18122B;
-    border-width: 1px;
+    background-color: var(--background-secondary-color);
     margin-bottom: 4px !important;  
+    margin: 4px;
+    padding: 6px 2px;
+    word-wrap: break-word;
 }
 
 .message .meta {
     font-weight: bold;
     font-size: 14px;
-    margin: 8px 10px 4px 16px;
+    margin: 4px 10px 4px 8px;
     color: var(--secondary-brighter-color);
 }
 
@@ -205,9 +220,9 @@ div.message {
 }
 
 .message .text {
-    margin: 0px 16px 12px;
+    margin: 0px 12px 8px;
     font-size: 16px;
-    white-space: normal;
+    /* white-space: normal; */
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
@@ -224,28 +239,16 @@ div.message {
 #inputBox {
     width: 100%;
     height: 60%;
-    margin-left: 10px;
+    margin-left: 4px;
     margin-right: 4px;
-    border-radius: 4px;
     font-size: 16px;
-    padding: 4px 12px;
+    padding: 12px 12px;
     box-sizing: content-box;
     border: none;
-    background-color: #dac8ff;
+    background-color: var(--background-secondary-color);
 }
 
 #inputBox:focus {
     border: transparent;
     outline: none;
 }
-
-.text-box i {
-    padding: 10px;
-    margin-right: 10px;
-    margin-left: 4px;
-}
-
-.text-box i:hover {
-    background-color: #dac8ff;
-}
-

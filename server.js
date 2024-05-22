@@ -46,7 +46,7 @@ app.get('/room/:room', (req, res) => {
     //console.log(req.params)
 })
 
-const botName = "Bot"
+const botName = "🤖 Bot"
 
 io.on('connection', socket => {
     //console.log(`new connection`)
@@ -61,7 +61,7 @@ io.on('connection', socket => {
         socket.join(ROOM_ID)
 
         //Welcome a new user
-        socket.emit('message', formatMessage(`${botName}`, `Welcome ${user.username}`))
+        socket.emit('message', formatMessage(`${botName}`, `Welcome ${user.username} 👋🥰`))
 
         //Broadcast when a user connect
         socket.broadcast.to(ROOM_ID).emit('message', formatMessage(`${botName}`, `${user.username} has joined`))
@@ -78,6 +78,7 @@ io.on('connection', socket => {
         socket.on('disconnect', () => {
             io.to(ROOM_ID).emit('message', formatMessage(`${botName}`, `${user.username} has left`))
             socket.broadcast.to(ROOM_ID).emit('user-disconnected', user.id)
+            global.username=""
         })
     })
 })

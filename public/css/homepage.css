@@ -1,12 +1,13 @@
 :root {
-    --primary-color: #18122B;
-    --primary-brighter-color: #201a34;
-    --secondary-color: #393053;
-    --secondary-brighter-color: #494065;
-    --neutral-color: #443C68;
-    --background-color: #635985;
+    --primary-color: #521657;
+    --primary-brighter-color: #341a34;
+    --secondary-color: #4d3053;
+    --secondary-brighter-color: #624065;
+    --neutral-color: #613c68;
+    --background-color: #f1daf2;
     --thin-line: rgba(0, 0, 0, 0.3 );
-    
+    --red-hover: #e45555;
+    --background-secondary-color: #feccff;
   }
 body {
     margin: 0;

@@ -25,22 +25,24 @@
             </div>  
             <div class="media-control">
                 <div class="media-control-button">
-                    <i class="fa-solid fa-microphone-slash"></i><br>
-                    <i class="fa-solid fa-video" onclick="offCam()"></i><br>
-                    <i class="fa-solid fa-phone-slash" id = "quitBtn"></i><br>
+                    <i class="fa-solid fa-microphone" title="Turn off micro"></i><br>
+                    <i class="fa-solid fa-video" title="Turn off camera"></i><br>
+                    <i class="fa-solid fa-phone-slash" id = "quitBtn" title="Quit"></i><br>
                     <!-- Add this HTML for the modal dialog -->
                     <div id="myModal" class="modal">
                     <div class="modal-content">
                         <span class="close">&times;</span>
                         <p>Are you sure you want to quit?</p>
-                        <button id="cancelBtn">Cancel</button>
-                        <button id="confirmQuitBtn">Quit</button>
+                        <div class="modal-Btn">
+                            <button id="cancelBtn">Cancel</button>
+                            <button id="confirmQuitBtn">Quit</button>
+                        </div>
                     </div>
                     </div>
                 </div>
                 <div class="media-roomId">
                     <div id="copyRoomId"></div>
-                    <i class="fa-solid fa-copy" onclick="copyId()"></i>
+                    <i class="fa-solid fa-copy" onclick="copyId()" title="Copy"></i>
                 </div>       
             </div>
         </div>
@@ -49,7 +51,6 @@
             </div>
             <form id="messageInputForm" class="text-box">
                 <input type="text" id="inputBox" placeholder="Aa" autocomplete="off">
-                <i class="fa-solid fa-paper-plane"></i>
             </form>
         </div>
         
